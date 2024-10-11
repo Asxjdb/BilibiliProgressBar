@@ -23,10 +23,10 @@
             return new Promise((resolve) => setTimeout(resolve, time));
         }(number * 1000).then(() => {
             // 通过检测分P栏的表头长度区分是否是有分P的视频
-            if (document.getElementsByClassName('cur-page').length == 0) return;
+            if (document.getElementsByClassName('video-pod__item').length == 0) return;
 
-            console.log("BilibiliProgressBar start process.");
-            mainBilibiliProgressBar();
+            console.log("start handle.");
+            mainBilibiliProgressBar();  // 竞赛写法
         });
     }
 
@@ -69,10 +69,10 @@
     function mainBilibiliProgressBar() {
         // 分P栏的表头, 利用正则表达式提取出想要的信息
         let cur_index = parseInt(document
-            .getElementsByClassName('cur-page')[0]
+            .getElementsByClassName('amt')[0]
             .innerHTML.match(/(\d+)\//)[1]);
         let end_index = parseInt(document
-            .getElementsByClassName('cur-page')[0]
+            .getElementsByClassName('amt')[0]
             .innerHTML.match(/\/(\d+)/)[1]);
 
         let cur_info = get_info(cur_index);
@@ -91,7 +91,7 @@
     }
 
     function handle_button(had_time_str, had_rate_str, remain_time_str) {
-        let plain = document.getElementsByClassName('video-info-detail')[0];// 确定位置
+        let plain = document.getElementsByClassName('video-info-detail-content')[0];// 确定位置
         let button_var = document.getElementById('button_tag_zweix');       // 原因见下
         // 因为这个地方要更新, 这里的策略是如果没有就创建, 没有就在其基础上修改
         let isNULL = (button_var === null);
@@ -102,7 +102,7 @@
             button_var.style = '\n' +
                 '    background-color: #24c7b4;\n' +
                 '    color: white;\n' +
-                '    font-size: 1rem;\n' +
+                '    font-size: 0.6rem;\n' +
                 '    text-align: center;\n' +
                 '    margin-left: 1rem;\n' +
                 '    padding:0.5rem;\n' +
